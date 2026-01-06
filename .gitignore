@@ -1,0 +1,64 @@
+HELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+# React frontend
+pettopia-frontend/build
+pettopia-frontend/.vite/
+
+# Logs
+pettopia-frontend/logs
+pettopia-frontend/*.log
+pettopia-frontend/npm-debug.log*
+pettopia-frontend/yarn-debug.log*
+pettopia-frontend/yarn-error.log*
+pettopia-frontend/pnpm-debug.log*
+pettopia-frontend/lerna-debug.log*
+
+# Node modules and build
+pettopia-frontend/node_modules
+pettopia-frontend/dist
+pettopia-frontend/dist-ssr
+pettopia-frontend/*.local
+
+# Editor directories and files
+pettopia-frontend/.vscode/*
+!pettopia-frontend/.vscode/extensions.json
+pettopia-frontend/.idea
+pettopia-frontend/.DS_Store
+pettopia-frontend/*.suo
+pettopia-frontend/*.ntvs*
+pettopia-frontend/*.njsproj
+pettopia-frontend/*.sln
+pettopia-frontend/*.sw?
+
