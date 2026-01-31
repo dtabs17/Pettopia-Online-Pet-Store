@@ -1,10 +1,4 @@
-# Pettopia Project – Weekly Progress & Feature Summary
-
-## Project: Pettopia Online Pet Store  
-Repository: assignment-two-dtabs17  
-Student: David Adebanwo
-K-Number: K00278226
-Module: Enterprise Application Development / IT Industrial Practice
+# Pettopia Project â€“ Weekly Progress & Feature Summary
 
 ---
 
@@ -21,7 +15,7 @@ Core database tables used: `products`, `categories`, `customers`, `orders`, `ord
 
 ---
 
-## Week 1 – Project Setup & Product Search
+## Week 1 â€“ Project Setup & Product Search
 
 ### Backend
 
@@ -48,7 +42,7 @@ Core database tables used: `products`, `categories`, `customers`, `orders`, `ord
 
 ---
 
-## Week 2 – Product Detail, Images, Stock Alerts, Cart Basics
+## Week 2 â€“ Product Detail, Images, Stock Alerts, Cart Basics
 
 ### Product Drill-Down
 
@@ -69,11 +63,11 @@ Core database tables used: `products`, `categories`, `customers`, `orders`, `ord
 ### Stock Handling
 
 - On the product detail page:
-  - If `stock_quantity < 10` ? shows **“Low stock”** alert.
-  - If `stock_quantity == 0` ? **“Out of stock / unavailable”** message and **disables Add to Cart**.
+  - If `stock_quantity < 10` ? shows **â€œLow stockâ€** alert.
+  - If `stock_quantity == 0` ? **â€œOut of stock / unavailableâ€** message and **disables Add to Cart**.
 - Backend enforces stock check so out-of-stock items cannot be added even via direct API calls.
 
-### Cart – Initial Implementation
+### Cart â€“ Initial Implementation
 
 - Implemented basic cart model with:
   - `Cart`, `CartItem` entities.
@@ -85,7 +79,7 @@ Core database tables used: `products`, `categories`, `customers`, `orders`, `ord
 
 ---
 
-## Week 3 – Full Cart / Orders, Wishlist, Back Office
+## Week 3 â€“ Full Cart / Orders, Wishlist, Back Office
 
 ### Cart & Order Finalisation
 
@@ -104,7 +98,7 @@ Core database tables used: `products`, `categories`, `customers`, `orders`, `ord
   - Clears cart after successful order.
 - `OrderController`:
   - `POST /api/orders/finalize`
-  - `GET /api/orders/my-orders` – list of all customer orders.
+  - `GET /api/orders/my-orders` â€“ list of all customer orders.
 
 ### Orders Frontend
 
@@ -114,10 +108,10 @@ Core database tables used: `products`, `categories`, `customers`, `orders`, `ord
   - **Finalize Order** button calls `/orders/finalize`.
   - Shows alert with order ID on success.
 - `Orders.jsx`:
-  - Fetches customer’s previous orders using `/orders/my-orders`.
+  - Fetches customerâ€™s previous orders using `/orders/my-orders`.
   - Displays order date, total, status, and items.
 
-### Wishlist – Unique Feature (Part 1)
+### Wishlist â€“ Unique Feature (Part 1)
 
 - Implemented **wishlist** for authenticated customers:
   - Entity and repository to store wishlist items (customer + product).
@@ -127,7 +121,7 @@ Core database tables used: `products`, `categories`, `customers`, `orders`, `ord
     - List wishlist items for current customer.
 - React:
   - On the product detail page, a **heart icon** beside the product name toggles the wishlist state: clicking the heart adds the product to the wishlist, and clicking again removes it (filled heart = in wishlist, outline heart = not in wishlist).
-  - `Wishlist.jsx` component displays the user’s wishlist with product name, price, and a remove action.
+  - `Wishlist.jsx` component displays the userâ€™s wishlist with product name, price, and a remove action.
 
 ### Back-office (Admin)
 
@@ -153,9 +147,9 @@ Core database tables used: `products`, `categories`, `customers`, `orders`, `ord
 
 ---
 
-## Week 4 – Unique Features, Security & Password Scheme
+## Week 4 â€“ Unique Features, Security & Password Scheme
 
-### Unique Feature – Points-Based Rewards System (Loyalty)
+### Unique Feature â€“ Points-Based Rewards System (Loyalty)
 
 **Core idea:** points-based loyalty system where customers earn points from orders and can redeem them as discounts.
 
@@ -168,7 +162,7 @@ Core database tables used: `products`, `categories`, `customers`, `orders`, `ord
 - Repository:
   - `RewardTransactionRepository` with `findByCustomerOrderByCreatedAtDesc(customer)`.
 - DTOs:
-  - `RewardSummaryDTO` – `totalPoints`, `transactions`.
+  - `RewardSummaryDTO` â€“ `totalPoints`, `transactions`.
 - `CustomerService`:
   - `earnPoints(customerId, points, source)`:
     - Increments `customer.rewardPoints`.
@@ -182,17 +176,17 @@ Core database tables used: `products`, `categories`, `customers`, `orders`, `ord
     - Creates `RewardTransaction` with negative `points` and type `REDEEM`.
     - Returns updated `RewardSummaryDTO`.
 - `CustomerController`:
-  - `GET /api/customers/rewards` – current total points + history.
-  - `POST /api/customers/rewards/redeem` – redeem points (via JSON body) when used directly.
+  - `GET /api/customers/rewards` â€“ current total points + history.
+  - `POST /api/customers/rewards/redeem` â€“ redeem points (via JSON body) when used directly.
 - `OrderService.finalizeCart`:
   - Calculates **order total** from cart.
-  - Applies **points discount** based on a redemption request (points used are treated as €1 per point).
+  - Applies **points discount** based on a redemption request (points used are treated as â‚¬1 per point).
   - Enforces:
     - Points used ? current available points.
     - Points used ? order total.
   - Sets `orderTotalAfterDiscount` and persists order.
   - Awards new points based on **conversion**:
-    - `1 point per €50 spent` (using `BigDecimal` and `RoundingMode.DOWN`).
+    - `1 point per â‚¬50 spent` (using `BigDecimal` and `RoundingMode.DOWN`).
   - Calls `customerService.earnPoints(...)` to record earned points.
 
 #### Frontend
@@ -206,19 +200,19 @@ Core database tables used: `products`, `categories`, `customers`, `orders`, `ord
   - Fetches current reward points when cart loads.
   - Allows user to enter **points to use** before clicking **Finalize Order**.
   - Automatically recalculates **visible total** on the frontend:
-    - `finalTotal = originalTotal – pointsUsed`.
-  - Shows hint: **“You’ll earn X points from this order”** based on the same €50-per-point rule.
+    - `finalTotal = originalTotal â€“ pointsUsed`.
+  - Shows hint: **â€œYouâ€™ll earn X points from this orderâ€** based on the same â‚¬50-per-point rule.
   - Calls `finalizeCart` with the chosen points; backend confirms and enforces rules.
 
 Result: Points system is fully integrated into checkout and visible to the user.
 
-### Unique Feature – Wishlist (Recap)
+### Unique Feature â€“ Wishlist (Recap)
 
 - Authenticated users:
   - Add products to wishlist using the **heart button** on the product detail page (and remove them using the same toggle).
   - View and manage wishlist items on a dedicated wishlist page.
 - Wishlist items reuse existing `products` data and the authenticated customer context.
-- This supports “save for later” behaviour and encourages users to return to products they are interested in.
+- This supports â€œsave for laterâ€ behaviour and encourages users to return to products they are interested in.
 
 ---
 
@@ -285,7 +279,7 @@ Frontend:
 - **Password hints**:
   - Not implemented on purpose (to avoid leaking hints that help attackers).
 - **Periodic mandatory changes**:
-  - No forced “change every X months” rule.
+  - No forced â€œchange every X monthsâ€ rule.
   - Users can reset manually via forgot/reset flow.
   - Reason: modern guidance prefers strong, stable passwords + reset on suspicion rather than arbitrary forced rotations.
 
