@@ -1,319 +1,384 @@
-# Pettopia Project – Weekly Progress & Feature Summary
+# Pettopia Online Pet Store
 
----
+Pettopia is a full-stack e-commerce web application for small domestic pets. It was built as a portfolio and academic project using a React frontend, a Spring Boot REST API, and a MariaDB database.
+
+The application supports both customer-facing shopping workflows and an admin back office. Customers can register, log in, search products, manage a cart, place orders, save products to a wishlist, and track loyalty points. Admin users can log in separately and manage products, categories, and discount codes through protected routes.
 
 ## Overview
 
-Pettopia is an online pet store for small domestic pets, built with:
+The project is split into two main parts:
 
-- **Backend**: Spring Boot (embedded Tomcat), Maven, MySQL/MariaDB
-- **Frontend**: React + Axios + Bootstrap (dark theme, responsive)
-- **Auth**: JWT-based authentication for customers and admin users
-- **Architecture**: MVC on backend, REST API, responsive SPA frontend
+- **Frontend:** a React single-page application using React Router, Axios, and Bootstrap
+- **Backend:** a Spring Boot REST API with Spring Security and JWT-based authentication
+- **Database:** MariaDB for product, customer, order, wishlist, discount, reward, and password reset data
 
-Core database tables used: `products`, `categories`, `customers`, `orders`, `order_items`, `order_status`, `discount_codes`, `reviews`, `admin_users`, plus additional tables for wishlist, reward transactions, and password reset tokens.
+Uploaded product images are stored locally and served through `/images/...` URLs.
 
----
+## Core Features
 
-## Week 1 – Project Setup & Product Search
+### Customer Features
+- Customer registration and login
+- Product search by category, price range, and keyword
+- Product detail pages with image gallery, reviews, category hierarchy, stock status, and active discounts
+- Cart management with add, update, remove, and clear actions
+- Order finalisation and order history
+- Wishlist support for authenticated customers
+- Loyalty points system with earn and redeem functionality
+- Change password, forgot password, and reset password flows
 
-### Backend
+### Admin Features
+- Separate admin login flow
+- Role-based admin access for `ADMIN` and `MANAGER`
+- Product creation, update, view, archive, and delete actions
+- Category retrieval for product management
+- Discount code creation, update, toggle, and delete actions
+- Thumbnail and gallery image upload support for products
 
-- Cloned Spring Boot starter project and configured **MySQL/MariaDB** connection.
-- Verified Maven build and application startup.
-- Created:
-  - `ProductController`, `ProductService`, `ProductRepository`.
-- Implemented **product search** endpoint:
-  - Filter by **category**, **min price**, **max price**, **keyword** (description).
-  - Null-safe optional filters in service layer.
-  - Returned product data with thumbnail URL.
-- Tested search API via Postman.
+### Security Features
+- Stateless JWT authentication using Bearer tokens
+- Spring Security route protection
+- BCrypt password hashing
+- Failed login tracking with temporary account lockout
+- Single-use password reset tokens with expiry
+- Backend stock validation during cart and checkout operations
+- Archive logic that prevents unavailable products from being used in customer flows
+
+## Tech Stack
 
 ### Frontend
+- React
+- React Router
+- Axios
+- Bootstrap
 
-- Created React app (`pettopia-frontend`).
-- Configured **Axios** base URL and integrated with backend.
-- Installed and wired **Bootstrap** for styling.
-- Implemented **ProductSearch** component:
-  - Inputs for category, min price, max price, and keyword.
-  - Calls backend on search.
-  - Displays results in **tabular form** with **thumbnail**, name, price, and truncated description.
-- Confirmed CORS works using `WebMvcConfigurer` and CORS config in Spring Boot.
+### Backend
+- Spring Boot
+- Spring Security
+- Maven
+- REST API architecture
 
----
+### Database
+- MariaDB
 
-## Week 2 – Product Detail, Images, Stock Alerts, Cart Basics
+### Authentication and Security
+- JWT
+- BCrypt password hashing
 
-### Product Drill-Down
+### Tooling
+- Git
+- GitHub
+- Postman
 
-- Implemented **product detail endpoint** returning:
-  - Core product fields (name, price, description, stock, date added).
-  - Category info for breadcrumbs.
-  - Any discount details (when present).
-  - Reviews and reviewer info.
-- Added **product detail React page** (`ProductDetail`):
-  - Clicking the product thumbnail in search navigates to the product detail view.
-  - Shows:
-    - Header with product name, price, category, availability.
-    - **Breadcrumb navigation**: e.g. `Home > Dogs > Toys > ProductName`.
-    - Description, date added.
-    - **Image gallery** (uses `image_gallery` / thumbnail).
-    - Reviews list and average rating (if reviews exist).
+## Architecture Overview
 
-### Stock Handling
+Pettopia follows a split frontend/backend architecture:
 
-- On the product detail page:
-  - If `stock_quantity < 10` ? shows **“Low stock”** alert.
-  - If `stock_quantity == 0` ? **“Out of stock / unavailable”** message and **disables Add to Cart**.
-- Backend enforces stock check so out-of-stock items cannot be added even via direct API calls.
+- The **React frontend** handles product browsing, authentication screens, cart and wishlist pages, rewards, orders, and admin UI flows.
+- The **Spring Boot backend** exposes REST endpoints for customers, products, cart, orders, wishlist, rewards, password reset, admin authentication, product management, and discount code management.
+- The **MariaDB database** stores application data including customers, products, categories, orders, order items, reviews, wishlist entries, reward transactions, discount codes, and password reset tokens.
 
-### Cart – Initial Implementation
+The frontend communicates with the backend through `/api` endpoints, and product images are served separately through `/images`.
 
-- Implemented basic cart model with:
-  - `Cart`, `CartItem` entities.
-  - `CartRepository`, `CartItemRepository`.
-- API endpoints to:
-  - Add item to cart.
-  - Get cart by authenticated customer.
-- Created initial `Cart` React component to display cart contents for logged-in users.
+## Main Functional Areas
 
----
+### Product Catalogue
+Customers can search products using optional filters for:
+- category
+- minimum price
+- maximum price
+- keyword
 
-## Week 3 – Full Cart / Orders, Wishlist, Back Office
+Product detail pages include:
+- product name and description
+- main thumbnail and gallery images
+- price and discount price
+- category hierarchy
+- stock status
+- active discounts
+- reviews and average rating
 
-### Cart & Order Finalisation
+### Cart and Checkout
+Authenticated customers can:
+- add products to cart
+- update item quantities
+- remove items
+- clear the cart
+- finalise the cart into an order
 
-- Completed full **cart lifecycle**:
-  - **Update quantity** (with max = stock).
-  - **Remove** single item.
-  - **Clear cart**.
-- Implemented **order finalisation** in `OrderService.finalizeCart`:
-  - Resolves customer from JWT.
-  - Fetches customer cart.
-  - Validates cart is not empty.
-  - Creates `Order` and associated `OrderItem` records.
-  - Calculates `total` from line items.
-  - Decrements `product.stock_quantity` for each purchased item.
-  - Assigns default `OrderStatus` (e.g. Pending).
-  - Clears cart after successful order.
-- `OrderController`:
-  - `POST /api/orders/finalize`
-  - `GET /api/orders/my-orders` – list of all customer orders.
+The backend validates stock before checkout and updates product stock after order completion.
 
-### Orders Frontend
+### Orders
+Authenticated customers can view their previous orders, including:
+- order ID
+- order date
+- total
+- payment method
+- items in the order
 
-- `Cart.jsx`:
-  - Displays items in tabular form (product name, price, quantity, row total).
-  - Supports **update quantity**, **remove**, **clear cart**.
-  - **Finalize Order** button calls `/orders/finalize`.
-  - Shows alert with order ID on success.
-- `Orders.jsx`:
-  - Fetches customer’s previous orders using `/orders/my-orders`.
-  - Displays order date, total, status, and items.
+### Wishlist
+Authenticated customers can:
+- add products to a wishlist
+- remove products from a wishlist
+- check whether a product is already saved
+- view their wishlist page
 
-### Wishlist – Unique Feature (Part 1)
+### Rewards System
+Pettopia includes a points-based loyalty system:
+- customers earn **1 point per €50 spent**
+- points can be redeemed at checkout
+- reward history is stored and returned through the API
 
-- Implemented **wishlist** for authenticated customers:
-  - Entity and repository to store wishlist items (customer + product).
-  - Endpoints to:
-    - Add product to wishlist.
-    - Remove product from wishlist.
-    - List wishlist items for current customer.
-- React:
-  - On the product detail page, a **heart icon** beside the product name toggles the wishlist state: clicking the heart adds the product to the wishlist, and clicking again removes it (filled heart = in wishlist, outline heart = not in wishlist).
-  - `Wishlist.jsx` component displays the user’s wishlist with product name, price, and a remove action.
+### Admin Back Office
+Admin users can:
+- log in through a separate admin flow
+- manage products
+- upload product images
+- archive or restore products
+- retrieve categories for product assignment
+- manage discount codes
 
-### Back-office (Admin)
+Products linked to historic orders are archived instead of being hard-deleted.
 
-- Admin authentication:
-  - Separate admin login endpoint (`/api/admin/login`).
-  - Uses JWT with roles (`ADMIN`, `MANAGER`).
-- Secured routes:
-  - `/api/admin/**` protected by role-based access (Spring Security).
-- Admin product management:
-  - Admin can **list**, **create**, **edit**, and **update** products.
-  - Validation via Spring (`@Valid`, constraint annotations) for product data.
-  - Supports **image upload / replace** (thumbnail + additional images).
-- Product archiving:
-  - Products can be **archived** (e.g. `active` flag).
-  - Archived products:
-    - Are hidden from normal catalogue search.
-    - Keep existing reviews and order history.
-    - Can be **reactivated** later if needed.
-    - Cannot be added to cart once archived.
-  - Behaviour defined for:
-    - Existing carts containing an item that becomes archived:
-      - At checkout, archived / unavailable items are rejected or removed with an error message.
+## API Overview
 
----
+This is a high-level overview of the main backend routes.
 
-## Week 4 – Unique Features, Security & Password Scheme
+### Public Routes
+- `POST /api/customers/register`
+- `POST /api/customers/login`
+- `POST /api/customers/forgot-password`
+- `POST /api/customers/reset-password`
+- `POST /api/admin/login`
+- `GET /api/products/search`
+- `/images/**`
 
-### Unique Feature – Points-Based Rewards System (Loyalty)
+### Authenticated Customer Routes
+- `POST /api/customers/logout`
+- `POST /api/customers/change-password`
+- `GET /api/customers/rewards`
+- `POST /api/customers/rewards/redeem`
 
-**Core idea:** points-based loyalty system where customers earn points from orders and can redeem them as discounts.
+### Cart Routes
+- `GET /api/cart`
+- `POST /api/cart/add`
+- `PUT /api/cart/update`
+- `DELETE /api/cart/remove/{productId}`
+- `DELETE /api/cart/clear`
 
-#### Backend
+### Order Routes
+- `POST /api/orders/finalize`
+- `GET /api/orders/my-orders`
 
-- Entities:
-  - `RewardTransaction`:
-    - Fields: `id`, `customer`, `points`, `transactionType (EARN/REDEEM)`, `source`, `reason`, `createdAt`.
-  - Added `rewardPoints` field to `Customer`.
-- Repository:
-  - `RewardTransactionRepository` with `findByCustomerOrderByCreatedAtDesc(customer)`.
-- DTOs:
-  - `RewardSummaryDTO` – `totalPoints`, `transactions`.
-- `CustomerService`:
-  - `earnPoints(customerId, points, source)`:
-    - Increments `customer.rewardPoints`.
-    - Inserts `RewardTransaction` of type `EARN`.
-  - `getRewardHistory(email)`:
-    - Looks up customer by email.
-    - Fetches all reward transactions sorted by `createdAt DESC`.
-    - Computes `totalPoints` as the sum of all transaction points.
-  - `redeemPoints(email, points, reason)`:
-    - Validates sufficient points (using transaction sum).
-    - Creates `RewardTransaction` with negative `points` and type `REDEEM`.
-    - Returns updated `RewardSummaryDTO`.
-- `CustomerController`:
-  - `GET /api/customers/rewards` – current total points + history.
-  - `POST /api/customers/rewards/redeem` – redeem points (via JSON body) when used directly.
-- `OrderService.finalizeCart`:
-  - Calculates **order total** from cart.
-  - Applies **points discount** based on a redemption request (points used are treated as €1 per point).
-  - Enforces:
-    - Points used ? current available points.
-    - Points used ? order total.
-  - Sets `orderTotalAfterDiscount` and persists order.
-  - Awards new points based on **conversion**:
-    - `1 point per €50 spent` (using `BigDecimal` and `RoundingMode.DOWN`).
-  - Calls `customerService.earnPoints(...)` to record earned points.
+### Wishlist Routes
+- `GET /api/wishlist`
+- `GET /api/wishlist/check`
+- `POST /api/wishlist/add`
+- `DELETE /api/wishlist/remove`
 
-#### Frontend
+### Product Routes
+- `GET /api/products/{id}`
 
-- `RewardsDashboard.jsx`:
-  - Fetches `/customers/rewards`.
-  - Shows **current total points** and full **transactions table**.
-  - Allows manual redemption (simulation) via `/customers/rewards/redeem`.
-- `Cart.jsx`:
-  - Displays **cart total**.
-  - Fetches current reward points when cart loads.
-  - Allows user to enter **points to use** before clicking **Finalize Order**.
-  - Automatically recalculates **visible total** on the frontend:
-    - `finalTotal = originalTotal – pointsUsed`.
-  - Shows hint: **“You’ll earn X points from this order”** based on the same €50-per-point rule.
-  - Calls `finalizeCart` with the chosen points; backend confirms and enforces rules.
+### Admin Product Routes
+- `GET /api/admin/products`
+- `GET /api/admin/products/{id}`
+- `POST /api/admin/products`
+- `PUT /api/admin/products/{id}`
+- `PATCH /api/admin/products/{id}/archive`
+- `DELETE /api/admin/products/{id}`
 
-Result: Points system is fully integrated into checkout and visible to the user.
+### Admin Category Routes
+- `GET /api/admin/categories`
 
-### Unique Feature – Wishlist (Recap)
+### Admin Discount Code Routes
+- `GET /api/admin/discount-codes`
+- `GET /api/admin/discount-codes/{id}`
+- `POST /api/admin/discount-codes`
+- `PUT /api/admin/discount-codes/{id}`
+- `PATCH /api/admin/discount-codes/{id}/toggle`
+- `DELETE /api/admin/discount-codes/{id}`
 
-- Authenticated users:
-  - Add products to wishlist using the **heart button** on the product detail page (and remove them using the same toggle).
-  - View and manage wishlist items on a dedicated wishlist page.
-- Wishlist items reuse existing `products` data and the authenticated customer context.
-- This supports “save for later” behaviour and encourages users to return to products they are interested in.
+## Frontend Routes
 
----
+The React frontend includes routes for:
+- `/`
+- `/products`
+- `/product/:id`
+- `/register`
+- `/login`
+- `/cart`
+- `/orders`
+- `/wishlist`
+- `/rewards`
+- `/forgot-password`
+- `/reset-password`
+- `/admin/login`
+- `/admin/products`
+- `/admin/products/new`
+- `/admin/products/:id/edit`
 
-## Password Management & Security Scheme
+## Local Development Setup
 
-### Storage & Hashing
 
-- All **customer** and **admin** passwords are stored as **BCrypt hashes**.
-- `BCryptPasswordEncoder` is used for hashing and verification.
-- BCrypt uses a unique salt per password, so identical plain-text passwords produce different hashes.
+### Prerequisites
+Install the following before running the project:
 
-### Password Policy
+- Java JDK
+- Maven
+- Node.js and npm
+- MariaDB
 
-- Enforced on **registration** and **password reset**:
-  - Minimum length (e.g. 8 characters).
-  - Optional additional checks (uppercase, lowercase, digit, special char) if configured.
-- Existing accounts with older/weaker passwords:
-  - Still allowed to log in.
-  - Any **new** password (registration / reset) must comply with the current policy.
+## 1. Clone the repository
 
-### Brute Force Protection
+```bash
+git clone https://github.com/dtabs17/Pettopia-Online-Pet-Store.git
+cd Pettopia-Online-Pet-Store
+```
 
-- `Customer` entity stores:
-  - `failedLoginAttempts`
-  - `accountLockedUntil`
-- `loginCustomer` logic:
-  - On each failed login, increments `failedLoginAttempts`.
-  - After too many failed attempts (e.g. 5), locks the account for a time window.
-  - On successful login, resets `failedLoginAttempts` and clears lock.
-- This limits brute force attempts and provides clear feedback when the account is temporarily locked.
+## 2. Create the database
 
-### Forgot / Reset Password Flow
+Create a MariaDB database for the project, for example:
 
-- `POST /api/customers/forgot-password`:
-  - Accepts email.
-  - Generates a `PasswordResetToken`:
-    - `token` (UUID)
-    - `customer`
-    - `expiresAt` (e.g. now + 1 hour)
-    - `used = false`
-  - Saves token to DB.
-  - In real deployment, an email would be sent. For this project, token and reset link are logged and/or returned to frontend for testing.
-- `POST /api/customers/reset-password`:
-  - Accepts token and new password.
-  - Validates:
-    - Token exists.
-    - Not expired.
-    - Not used.
-    - New password satisfies policy.
-  - Hashes new password with BCrypt and updates the customer.
-  - Marks token as `used`.
+```sql
+CREATE DATABASE pettopia;
+```
 
-Frontend:
+After creating the database, set up the schema and seed data required by the application. If your repository includes SQL export files, import them into the new database before starting the backend.
 
-- **ForgotPassword** page:
-  - Simple form for email.
-  - Calls `/forgot-password` and shows confirmation + reset link for dev/testing.
-- **ResetPassword** page:
-  - Reads `token` from `/reset-password?token=...`.
-  - Lets user set new password; sends to `/reset-password`.
+## 3. Configure the backend
 
-### Password Hints & Expiry
+Create or update your Spring Boot configuration with the required database, JWT, and upload settings.
 
-- **Password hints**:
-  - Not implemented on purpose (to avoid leaking hints that help attackers).
-- **Periodic mandatory changes**:
-  - No forced “change every X months” rule.
-  - Users can reset manually via forgot/reset flow.
-  - Reason: modern guidance prefers strong, stable passwords + reset on suspicion rather than arbitrary forced rotations.
+Example `application.properties` values:
 
-### Transport Security (HTTPS)
+```properties
+spring.datasource.url=jdbc:mariadb://localhost:3306/pettopia
+spring.datasource.username=YOUR_DB_USERNAME
+spring.datasource.password=YOUR_DB_PASSWORD
 
-- For local dev, app runs on HTTP.
-- For a real deployment, Pettopia is expected to be hosted behind HTTPS (TLS) so passwords are **never transmitted in plain text** over the network.
-- This is a deployment concern (reverse proxy / server config), not controller code.
+jwt.secret=replace_this_with_a_long_random_secret
+jwt.expiration-ms=86400000
 
----
+app.upload.dir=${user.home}/pettopia-images
+```
 
-## Weekly Demo & Git Usage
+### Important local configuration notes
+- The backend CORS configuration currently allows requests from `http://localhost:5173`
+- Uploaded product images are stored locally under the configured upload directory
+- The frontend service files currently point to `http://localhost:8080/api` and `http://localhost:8080/api/admin`
 
-- Work has been committed incrementally to GitHub with feature-focused branches:
-  - `feature/product-search`
-  - `feature/product-detail`
-  - `feature/cart-orders`
-  - `feature/wishlist`
-  - `feature/cart-orders`
-  - `feature/wishlist`
-  - `feature/rewards`
-  - `feature/password-management`
-- In some cases, I worked on multiple features within the same branch, especially when previous features had bugs that were causing the app to crash. I fixed the new features, then later resolved the original issues that were affecting the earlier feature. This was done to avoid pushing broken code to the main branch.
-- Each week:
-  - New features implemented.
-  - Tested locally.
-  - Committed and pushed to the assignment repository.
-- This MD file is updated to reflect weekly progress and major changes.
+If you change the backend port, host, or frontend port, update the relevant frontend service files and backend CORS configuration.
 
----
+## 4. Run the backend
 
-## Final Steps
+From the backend project directory:
 
-- Final UI polish and responsiveness checks.
-- Additional validation and friendly error messages across the frontend.
-- Small UX tweaks.
-- Final test on a clean machine / environment to make sure everything runs as expects.
+```bash
+mvn spring-boot:run
+```
+
+By default, Spring Boot runs on port `8080` unless changed in configuration.
+
+## 5. Run the frontend
+
+From the frontend project directory:
+
+```bash
+npm install
+npm run dev
+```
+
+The frontend is expected to run on:
+
+```text
+http://localhost:5173
+```
+
+## Authentication Notes
+
+Pettopia uses stateless JWT authentication.
+
+- Customer login returns a JWT token and customer email
+- Admin login returns a JWT token, admin email, and role
+- Protected routes require an `Authorization: Bearer <token>` header
+- In the frontend, the token is stored in `localStorage` and attached through an Axios interceptor
+
+### Public backend routes
+These routes are currently permitted without authentication:
+
+- `POST /api/customers/register`
+- `POST /api/customers/login`
+- `POST /api/customers/forgot-password`
+- `POST /api/customers/reset-password`
+- `POST /api/admin/login`
+- `GET /api/products/search`
+- `/images/**`
+
+All other routes require authentication under the current Spring Security configuration.
+
+## Password Reset Notes
+
+The forgot-password flow is development-oriented in the current project:
+
+- the backend generates a reset token
+- the token is stored in the database
+- the response includes the reset token and a reset URL for testing
+- the frontend displays the reset link directly
+
+This avoids needing a real email delivery service during local development.
+
+## Password Policy
+
+The current password policy requires:
+
+- minimum length of 10 characters
+- maximum length of 64 characters
+
+Additional account protection includes:
+
+- failed login attempt tracking
+- temporary account lockout after repeated failed logins
+- single-use password reset tokens with expiry
+
+## Rewards System Notes
+
+Pettopia includes a points-based rewards system with the following current behaviour:
+
+- customers earn **1 point per €50 spent**
+- points can be redeemed at checkout
+- points are stored as reward transactions
+- the rewards dashboard shows total points and transaction history
+- checkout applies a points discount before saving the final order total
+
+## Product Archive and Deletion Rules
+
+The project includes archive logic for products.
+
+- archived products are marked unavailable for customer flows
+- archived products cannot be added to cart
+- archived products already in a cart are removed when the cart is loaded
+- archiving also updates product activity/discontinued flags
+- if a product has existing order history, it is archived instead of hard-deleted
+
+This helps preserve historical order data while preventing unavailable products from continuing through customer workflows.
+
+## Image Upload Notes
+
+Admin product management supports:
+
+- one thumbnail image
+- multiple gallery images
+
+Uploaded files are:
+
+- saved to a local upload directory
+- given generated filenames
+- returned as `/images/...` URLs
+- displayed in both customer and admin views
+
+## Project Status
+
+This repository reflects a working academic and portfolio project. It implements the main customer and admin workflows end to end, but it should not be treated as production-ready commerce software without further hardening, automated testing, deployment configuration, and operational safeguards.
+
+## Author
+
+David Adebanwo
