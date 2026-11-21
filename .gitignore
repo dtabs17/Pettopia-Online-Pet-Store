@@ -62,3 +62,7 @@ pettopia-frontend/*.njsproj
 pettopia-frontend/*.sln
 pettopia-frontend/*.sw?
 
+# Environment configuration
+.env
+.env.*
+!.env.example
