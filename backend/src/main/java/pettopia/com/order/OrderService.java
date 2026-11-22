@@ -1,4 +1,6 @@
-package pettopia.com.services;
+package pettopia.com.order;
+
+import pettopia.com.services.CustomerService;
 
 import pettopia.com.cart.Cart;
 import pettopia.com.cart.CartItem;

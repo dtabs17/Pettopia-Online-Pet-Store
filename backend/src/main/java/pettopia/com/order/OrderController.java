@@ -1,10 +1,8 @@
-package pettopia.com.controllers;
+package pettopia.com.order;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import pettopia.com.dtos.RedeemRequestDTO;
-import pettopia.com.entities.Order;
-import pettopia.com.services.OrderService;
 
 import java.util.List;
 

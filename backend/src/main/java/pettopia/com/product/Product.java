@@ -1,5 +1,7 @@
 package pettopia.com.product;
 
+import pettopia.com.order.OrderItem;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -8,7 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import pettopia.com.entities.Category;
-import pettopia.com.entities.OrderItem;
 import pettopia.com.entities.Review;
 
 import java.math.BigDecimal;
