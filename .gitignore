@@ -32,35 +32,23 @@ build/
 ### VS Code ###
 .vscode/
 
-# React frontend
-pettopia-frontend/build
-pettopia-frontend/.vite/
+# Frontend dependencies and build output
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/build/
+frontend/.vite/
 
-# Logs
-pettopia-frontend/logs
-pettopia-frontend/*.log
-pettopia-frontend/npm-debug.log*
-pettopia-frontend/yarn-debug.log*
-pettopia-frontend/yarn-error.log*
-pettopia-frontend/pnpm-debug.log*
-pettopia-frontend/lerna-debug.log*
+# Frontend logs
+frontend/logs/
+frontend/*.log
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/pnpm-debug.log*
 
-# Node modules and build
-pettopia-frontend/node_modules
-pettopia-frontend/dist
-pettopia-frontend/dist-ssr
-pettopia-frontend/*.local
-
-# Editor directories and files
-pettopia-frontend/.vscode/*
-!pettopia-frontend/.vscode/extensions.json
-pettopia-frontend/.idea
-pettopia-frontend/.DS_Store
-pettopia-frontend/*.suo
-pettopia-frontend/*.ntvs*
-pettopia-frontend/*.njsproj
-pettopia-frontend/*.sln
-pettopia-frontend/*.sw?
+# Local frontend configuration
+frontend/*.local
 
 # Environment configuration
 .env
