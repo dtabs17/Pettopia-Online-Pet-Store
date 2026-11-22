@@ -1,4 +1,4 @@
-package pettopia.com.dtos;
+package pettopia.com.admin.dto;
 
 public class AdminLoginResponse {
     private String token;

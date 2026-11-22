@@ -1,4 +1,4 @@
-package pettopia.com.entities;
+package pettopia.com.admin;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

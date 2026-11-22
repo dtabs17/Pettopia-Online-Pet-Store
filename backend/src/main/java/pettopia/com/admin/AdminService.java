@@ -1,11 +1,11 @@
-package pettopia.com.services;
+package pettopia.com.admin;
+
+import pettopia.com.admin.dto.AdminLoginRequest;
+import pettopia.com.admin.dto.AdminLoginResponse;
+import pettopia.com.services.JwtService;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pettopia.com.dtos.AdminLoginRequest;
-import pettopia.com.dtos.AdminLoginResponse;
-import pettopia.com.entities.AdminUser;
-import pettopia.com.repositories.AdminRepository;
 
 import java.time.LocalDateTime;
 

@@ -1,11 +1,11 @@
-package pettopia.com.controllers;
+package pettopia.com.admin;
+
+import pettopia.com.admin.dto.AdminLoginRequest;
+import pettopia.com.admin.dto.AdminLoginResponse;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pettopia.com.dtos.AdminLoginRequest;
-import pettopia.com.dtos.AdminLoginResponse;
-import pettopia.com.services.AdminService;
 
 import java.util.Map;
 

@@ -1,7 +1,6 @@
-package pettopia.com.repositories;
+package pettopia.com.admin;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pettopia.com.entities.AdminUser;
 
 import java.util.Optional;
 
