@@ -1,8 +1,6 @@
-package pettopia.com.controllers;
+package pettopia.com.category;
 
 import org.springframework.web.bind.annotation.*;
-import pettopia.com.entities.Category;
-import pettopia.com.repositories.CategoryRepository;
 
 import java.util.List;
 

@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import pettopia.com.entities.Category;
+import pettopia.com.category.Category;
 import pettopia.com.entities.Review;
 
 import java.math.BigDecimal;

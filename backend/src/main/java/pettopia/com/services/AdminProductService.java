@@ -5,12 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import pettopia.com.entities.Category;
+import pettopia.com.category.Category;
 import pettopia.com.product.Product;
 import pettopia.com.product.ProductRepository;
 import pettopia.com.product.dto.ProductRequestDTO;
 import pettopia.com.product.dto.ProductResponseDTO;
-import pettopia.com.repositories.CategoryRepository;
+import pettopia.com.category.CategoryRepository;
 
 import java.io.IOException;
 import java.time.LocalDate;
