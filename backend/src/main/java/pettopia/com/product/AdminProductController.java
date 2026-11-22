@@ -1,4 +1,4 @@
-package pettopia.com.controllers;
+package pettopia.com.product;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -6,7 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import pettopia.com.product.dto.ProductRequestDTO;
 import pettopia.com.product.dto.ProductResponseDTO;
-import pettopia.com.services.AdminProductService;
 
 import java.io.IOException;
 import java.math.BigDecimal;

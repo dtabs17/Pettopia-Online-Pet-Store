@@ -1,4 +1,6 @@
-package pettopia.com.services;
+package pettopia.com.product;
+
+import pettopia.com.services.ImageStorageService;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
