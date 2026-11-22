@@ -7,11 +7,11 @@ import pettopia.com.dtos.CustomerRegistrationDTO;
 import pettopia.com.dtos.JwtResponseDTO;
 import pettopia.com.entities.Customer;
 import pettopia.com.entities.PasswordResetToken;
-import pettopia.com.entities.RewardTransaction;
+import pettopia.com.reward.RewardTransaction;
 import pettopia.com.repositories.CustomerRepository;
 import pettopia.com.repositories.PasswordResetTokenRepository;
-import pettopia.com.repositories.RewardTransactionRepository;
-import pettopia.com.dtos.RewardSummaryDTO;
+import pettopia.com.reward.RewardTransactionRepository;
+import pettopia.com.reward.dto.RewardSummaryDTO;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package pettopia.com.dtos;
+package pettopia.com.reward.dto;
 
 import lombok.Data;
 

@@ -1,4 +1,6 @@
-package pettopia.com.entities;
+package pettopia.com.reward;
+
+import pettopia.com.entities.Customer;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

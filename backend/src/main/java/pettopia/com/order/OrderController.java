@@ -2,7 +2,7 @@ package pettopia.com.order;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import pettopia.com.dtos.RedeemRequestDTO;
+import pettopia.com.reward.dto.RedeemRequestDTO;
 
 import java.util.List;
 
