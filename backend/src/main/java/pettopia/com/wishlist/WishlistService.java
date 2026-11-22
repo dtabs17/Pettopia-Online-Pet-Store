@@ -1,4 +1,4 @@
-package pettopia.com.services;
+package pettopia.com.wishlist;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

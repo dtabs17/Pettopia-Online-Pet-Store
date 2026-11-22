@@ -1,10 +1,10 @@
-package pettopia.com.controllers;
+package pettopia.com.wishlist;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import pettopia.com.product.Product;
-import pettopia.com.services.WishlistService;
+import pettopia.com.wishlist.WishlistService;
 
 import java.util.List;
 
