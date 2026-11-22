@@ -1,4 +1,4 @@
-package pettopia.com.dtos;
+package pettopia.com.product.dto;
 
 import java.math.BigDecimal;
 

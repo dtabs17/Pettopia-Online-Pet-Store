@@ -1,9 +1,11 @@
-package pettopia.com.dtos;
+package pettopia.com.product.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pettopia.com.dtos.DiscountCodeDTO;
+import pettopia.com.dtos.ReviewDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

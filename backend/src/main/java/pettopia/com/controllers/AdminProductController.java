@@ -3,9 +3,10 @@ package pettopia.com.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pettopia.com.dtos.ProductRequestDTO;
-import pettopia.com.dtos.ProductResponseDTO;
-import pettopia.com.entities.Product;
+
+import pettopia.com.product.Product;
+import pettopia.com.product.dto.ProductRequestDTO;
+import pettopia.com.product.dto.ProductResponseDTO;
 import pettopia.com.services.AdminProductService;
 
 import java.io.IOException;

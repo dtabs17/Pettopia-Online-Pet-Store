@@ -4,12 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import pettopia.com.dtos.ProductRequestDTO;
-import pettopia.com.dtos.ProductResponseDTO;
+
 import pettopia.com.entities.Category;
-import pettopia.com.entities.Product;
+import pettopia.com.product.Product;
+import pettopia.com.product.ProductRepository;
+import pettopia.com.product.dto.ProductRequestDTO;
+import pettopia.com.product.dto.ProductResponseDTO;
 import pettopia.com.repositories.CategoryRepository;
-import pettopia.com.repositories.ProductRepository;
 
 import java.io.IOException;
 import java.time.LocalDate;

@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pettopia.com.dtos.CartResponseDTO;
 import pettopia.com.entities.*;
+import pettopia.com.product.Product;
+import pettopia.com.product.ProductRepository;
 import pettopia.com.repositories.*;
 
 import java.util.ArrayList;

@@ -3,6 +3,8 @@ package pettopia.com.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pettopia.com.entities.*;
+import pettopia.com.product.Product;
+import pettopia.com.product.ProductRepository;
 import pettopia.com.repositories.*;
 
 import java.math.BigDecimal;

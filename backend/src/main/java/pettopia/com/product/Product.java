@@ -1,4 +1,4 @@
-package pettopia.com.entities;
+package pettopia.com.product;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -6,6 +6,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import pettopia.com.entities.Category;
+import pettopia.com.entities.OrderItem;
+import pettopia.com.entities.Review;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -3,6 +3,7 @@ package pettopia.com.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import pettopia.com.product.Product;
 
 import java.math.BigDecimal;
 

@@ -2,7 +2,8 @@ package pettopia.com.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import pettopia.com.entities.Product;
+
+import pettopia.com.product.Product;
 import pettopia.com.services.WishlistService;
 
 import java.util.List;

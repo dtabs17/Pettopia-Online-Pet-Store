@@ -1,9 +1,10 @@
-package pettopia.com.controllers;
+package pettopia.com.product;
 
 import org.springframework.web.bind.annotation.*;
-import pettopia.com.dtos.ProductDetailDTO;
-import pettopia.com.dtos.ProductSearchDTO;
-import pettopia.com.services.ProductService;
+
+import pettopia.com.product.dto.ProductDetailDTO;
+import pettopia.com.product.dto.ProductSearchDTO;
+
 import java.math.BigDecimal;
 import java.util.List;
 
