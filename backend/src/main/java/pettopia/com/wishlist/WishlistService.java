@@ -1,5 +1,8 @@
 package pettopia.com.wishlist;
 
+import pettopia.com.customer.Customer;
+import pettopia.com.customer.CustomerRepository;
+
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

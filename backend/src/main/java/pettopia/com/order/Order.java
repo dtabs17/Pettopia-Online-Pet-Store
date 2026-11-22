@@ -1,8 +1,9 @@
     package pettopia.com.order;
 
+import pettopia.com.customer.Customer;
+
 import pettopia.com.discount.DiscountCode;
 
-import pettopia.com.entities.Customer;
 
     import com.fasterxml.jackson.annotation.JsonBackReference;
     import com.fasterxml.jackson.annotation.JsonManagedReference;

@@ -1,5 +1,7 @@
 package pettopia.com.entities;
 
+import pettopia.com.customer.Customer;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

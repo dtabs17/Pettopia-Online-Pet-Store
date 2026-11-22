@@ -1,5 +1,8 @@
 package pettopia.com.cart;
 
+import pettopia.com.customer.Customer;
+import pettopia.com.customer.CustomerRepository;
+
 import pettopia.com.cart.dto.CartResponseDTO;
 
 import lombok.RequiredArgsConstructor;

@@ -1,10 +1,11 @@
 package pettopia.com.wishlist;
 
+import pettopia.com.customer.Customer;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import pettopia.com.entities.Customer;
 import pettopia.com.product.Product;
 
 import java.time.LocalDateTime;

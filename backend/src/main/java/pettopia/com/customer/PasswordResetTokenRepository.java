@@ -1,7 +1,6 @@
-package pettopia.com.repositories;
+package pettopia.com.customer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import pettopia.com.entities.PasswordResetToken;
 
 import java.util.Optional;
 

@@ -1,7 +1,8 @@
 package pettopia.com.reward;
 
+import pettopia.com.customer.Customer;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import pettopia.com.entities.Customer;
 import pettopia.com.reward.RewardTransaction;
 
 import java.util.List;

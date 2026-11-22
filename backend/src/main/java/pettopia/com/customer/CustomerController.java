@@ -1,14 +1,18 @@
-package pettopia.com.controllers;
+package pettopia.com.customer;
+
+import pettopia.com.customer.dto.ChangePasswordDTO;
+import pettopia.com.customer.dto.CustomerLoginDTO;
+import pettopia.com.customer.dto.CustomerRegistrationDTO;
+import pettopia.com.customer.dto.ForgotPasswordRequestDTO;
+import pettopia.com.customer.dto.ForgotPasswordResponseDTO;
+import pettopia.com.customer.dto.JwtResponseDTO;
+import pettopia.com.customer.dto.ResetPasswordDTO;
 
 import org.springframework.web.bind.annotation.*;
 import pettopia.com.config.JwtUtil;
 import pettopia.com.dtos.*;
 import pettopia.com.reward.dto.RedeemRequestDTO;
 import pettopia.com.reward.dto.RewardSummaryDTO;
-import pettopia.com.services.CustomerService;
-import pettopia.com.dtos.ChangePasswordDTO;
-import pettopia.com.dtos.ForgotPasswordRequestDTO;
-import pettopia.com.dtos.ResetPasswordDTO;
 
 
 @RestController

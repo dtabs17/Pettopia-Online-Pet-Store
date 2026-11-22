@@ -1,7 +1,8 @@
 package pettopia.com.cart;
 
+import pettopia.com.customer.Customer;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import pettopia.com.entities.Customer;
 
 import java.util.Optional;
 

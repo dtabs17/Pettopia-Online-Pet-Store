@@ -1,11 +1,12 @@
 package pettopia.com.wishlist;
 
+import pettopia.com.customer.Customer;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import pettopia.com.product.Product;
 import pettopia.com.wishlist.Wishlist;
-import pettopia.com.entities.Customer;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,15 +1,13 @@
-package pettopia.com.services;
+package pettopia.com.customer;
+
+import pettopia.com.customer.dto.CustomerLoginDTO;
+import pettopia.com.customer.dto.CustomerRegistrationDTO;
+import pettopia.com.customer.dto.JwtResponseDTO;
+import pettopia.com.services.JwtService;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pettopia.com.dtos.CustomerLoginDTO;
-import pettopia.com.dtos.CustomerRegistrationDTO;
-import pettopia.com.dtos.JwtResponseDTO;
-import pettopia.com.entities.Customer;
-import pettopia.com.entities.PasswordResetToken;
 import pettopia.com.reward.RewardTransaction;
-import pettopia.com.repositories.CustomerRepository;
-import pettopia.com.repositories.PasswordResetTokenRepository;
 import pettopia.com.reward.RewardTransactionRepository;
 import pettopia.com.reward.dto.RewardSummaryDTO;
 
