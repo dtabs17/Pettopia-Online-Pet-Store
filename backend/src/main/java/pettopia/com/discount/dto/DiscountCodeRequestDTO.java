@@ -1,17 +1,15 @@
-package pettopia.com.dtos;
+package pettopia.com.discount.dto;
 
-import lombok.AllArgsConstructor;
+import pettopia.com.discount.DiscountCode;
+
 import lombok.Data;
-import pettopia.com.entities.DiscountCode;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
-public class DiscountCodeResponseDTO {
+public class DiscountCodeRequestDTO {
 
-    private Integer discountId;
     private String code;
     private String description;
     private DiscountCode.DiscountType discountType;
@@ -19,6 +17,4 @@ public class DiscountCodeResponseDTO {
     private LocalDate startDate;
     private LocalDate expiryDate;
     private Integer usageLimit;
-    private Integer usedCount;
-    private Boolean active;
 }

@@ -1,10 +1,10 @@
-package pettopia.com.controllers;
+package pettopia.com.discount;
+
+import pettopia.com.discount.dto.DiscountCodeRequestDTO;
+import pettopia.com.discount.dto.DiscountCodeResponseDTO;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pettopia.com.dtos.DiscountCodeRequestDTO;
-import pettopia.com.dtos.DiscountCodeResponseDTO;
-import pettopia.com.services.AdminDiscountCodeService;
 
 import java.util.List;
 

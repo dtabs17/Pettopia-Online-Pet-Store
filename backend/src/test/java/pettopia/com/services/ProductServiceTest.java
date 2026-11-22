@@ -1,12 +1,13 @@
 package pettopia.com.services;
 
+import pettopia.com.discount.DiscountCodeRepository;
+
 import org.junit.jupiter.api.Test;
 
 import pettopia.com.product.Product;
 import pettopia.com.product.ProductRepository;
 import pettopia.com.product.ProductService;
 import pettopia.com.product.dto.ProductSearchDTO;
-import pettopia.com.repositories.DiscountCodeRepository;
 
 import java.math.BigDecimal;
 import java.util.List;

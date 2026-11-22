@@ -1,10 +1,9 @@
-package pettopia.com.services;
+package pettopia.com.discount;
+
+import pettopia.com.discount.dto.DiscountCodeRequestDTO;
+import pettopia.com.discount.dto.DiscountCodeResponseDTO;
 
 import org.springframework.stereotype.Service;
-import pettopia.com.dtos.DiscountCodeRequestDTO;
-import pettopia.com.dtos.DiscountCodeResponseDTO;
-import pettopia.com.entities.DiscountCode;
-import pettopia.com.repositories.DiscountCodeRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

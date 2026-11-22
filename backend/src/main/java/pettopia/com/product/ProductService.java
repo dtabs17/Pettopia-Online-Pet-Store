@@ -1,14 +1,15 @@
 package pettopia.com.product;
 
+import pettopia.com.discount.DiscountCodeRepository;
+import pettopia.com.discount.dto.DiscountCodeDTO;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
-import pettopia.com.dtos.DiscountCodeDTO;
 import pettopia.com.dtos.ReviewDTO;
 import pettopia.com.entities.Category;
 import pettopia.com.product.dto.ProductDetailDTO;
 import pettopia.com.product.dto.ProductSearchDTO;
-import pettopia.com.repositories.DiscountCodeRepository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

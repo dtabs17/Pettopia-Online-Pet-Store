@@ -1,4 +1,6 @@
-package pettopia.com.entities;
+package pettopia.com.discount;
+
+import pettopia.com.order.Order;
 
 import pettopia.com.order.Order;
 

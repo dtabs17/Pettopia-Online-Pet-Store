@@ -1,4 +1,4 @@
-package pettopia.com.dtos;
+package pettopia.com.discount.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
