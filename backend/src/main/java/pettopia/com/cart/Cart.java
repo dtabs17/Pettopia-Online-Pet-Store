@@ -1,4 +1,6 @@
-package pettopia.com.entities;
+package pettopia.com.cart;
+
+import pettopia.com.entities.Customer;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;

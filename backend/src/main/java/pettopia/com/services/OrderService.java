@@ -1,5 +1,10 @@
 package pettopia.com.services;
 
+import pettopia.com.cart.Cart;
+import pettopia.com.cart.CartItem;
+import pettopia.com.cart.CartItemRepository;
+import pettopia.com.cart.CartRepository;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pettopia.com.entities.*;

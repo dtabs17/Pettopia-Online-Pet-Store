@@ -1,6 +1,7 @@
-package pettopia.com.dtos;
+package pettopia.com.cart.dto;
 
-import pettopia.com.entities.Cart;
+import pettopia.com.cart.Cart;
+
 
 import java.util.List;
 

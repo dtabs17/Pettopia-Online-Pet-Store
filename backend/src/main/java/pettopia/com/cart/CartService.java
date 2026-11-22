@@ -1,8 +1,9 @@
-package pettopia.com.services;
+package pettopia.com.cart;
+
+import pettopia.com.cart.dto.CartResponseDTO;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pettopia.com.dtos.CartResponseDTO;
 import pettopia.com.entities.*;
 import pettopia.com.product.Product;
 import pettopia.com.product.ProductRepository;

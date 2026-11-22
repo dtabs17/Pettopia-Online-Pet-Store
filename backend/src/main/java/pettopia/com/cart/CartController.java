@@ -1,10 +1,8 @@
-package pettopia.com.controllers;
+package pettopia.com.cart;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import pettopia.com.entities.Cart;
-import pettopia.com.services.CartService;
 
 @RestController
 @RequestMapping("/api/cart")
