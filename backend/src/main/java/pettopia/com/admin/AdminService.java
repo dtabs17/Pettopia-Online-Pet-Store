@@ -2,7 +2,7 @@ package pettopia.com.admin;
 
 import pettopia.com.admin.dto.AdminLoginRequest;
 import pettopia.com.admin.dto.AdminLoginResponse;
-import pettopia.com.services.JwtService;
+import pettopia.com.security.JwtService;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

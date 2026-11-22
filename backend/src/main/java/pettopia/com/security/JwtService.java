@@ -1,4 +1,4 @@
-package pettopia.com.services;
+package pettopia.com.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

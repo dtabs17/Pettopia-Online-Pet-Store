@@ -34,7 +34,7 @@ public class OrderService {
     private final OrderStatusRepository orderStatusRepository;
     private final CustomerService customerService;
 
-    private final pettopia.com.config.JwtUtil jwtUtil;
+    private final pettopia.com.security.JwtUtil jwtUtil;
 
     private Customer getCustomerFromEmail(String email) {
         return customerRepository.findByEmail(email)

@@ -1,4 +1,4 @@
-package pettopia.com.config;
+package pettopia.com.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;

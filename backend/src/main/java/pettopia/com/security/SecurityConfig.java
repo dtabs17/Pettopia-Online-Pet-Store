@@ -1,4 +1,4 @@
-package pettopia.com.config;
+package pettopia.com.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

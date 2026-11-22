@@ -19,7 +19,7 @@ public class WishlistService {
     private final WishlistRepository wishlistRepository;
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
-    private final pettopia.com.config.JwtUtil jwtUtil;
+    private final pettopia.com.security.JwtUtil jwtUtil;
 
     private Customer getCustomerFromToken(String tokenOrHeader) {
         String token = tokenOrHeader == null ? null : tokenOrHeader.trim();

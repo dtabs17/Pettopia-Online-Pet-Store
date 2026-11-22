@@ -3,7 +3,7 @@ package pettopia.com.customer;
 import pettopia.com.customer.dto.CustomerLoginDTO;
 import pettopia.com.customer.dto.CustomerRegistrationDTO;
 import pettopia.com.customer.dto.JwtResponseDTO;
-import pettopia.com.services.JwtService;
+import pettopia.com.security.JwtService;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
