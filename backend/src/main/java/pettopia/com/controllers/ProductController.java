@@ -2,7 +2,7 @@ package pettopia.com.controllers;
 
 import org.springframework.web.bind.annotation.*;
 import pettopia.com.dtos.ProductDetailDTO;
-import pettopia.com.entities.Product;
+import pettopia.com.dtos.ProductSearchDTO;
 import pettopia.com.services.ProductService;
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,7 +18,7 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public List<Product> searchProducts (@RequestParam(required = false) String category,
+    public List<ProductSearchDTO> searchProducts (@RequestParam(required = false) String category,
                                          @RequestParam(required = false) BigDecimal minPrice,
                                          @RequestParam(required = false) BigDecimal maxPrice,
                                          @RequestParam(required = false) String keyword)

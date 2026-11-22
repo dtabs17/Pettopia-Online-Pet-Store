@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import pettopia.com.dtos.DiscountCodeDTO;
 import pettopia.com.dtos.ProductDetailDTO;
+import pettopia.com.dtos.ProductSearchDTO;
 import pettopia.com.dtos.ReviewDTO;
 import pettopia.com.entities.Category;
 import pettopia.com.entities.Product;
@@ -29,11 +30,20 @@ public class ProductService {
         this.discountCodeRepository = discountCodeRepository;
     }
 
-    public List<Product> searchProducts(String category, BigDecimal minPrice, BigDecimal maxPrice, String keyword) {
-        String categoryName = (category != null && !category.isEmpty()) ? category : null;
-        String key = (keyword != null && !keyword.isEmpty()) ? keyword : null;
+    public List<ProductSearchDTO> searchProducts(String category, BigDecimal minPrice, BigDecimal maxPrice, String keyword) {
+    String categoryName = (category != null && !category.isEmpty()) ? category : null;
+    String key = (keyword != null && !keyword.isEmpty()) ? keyword : null;
 
-        return productRepository.searchProducts(key, minPrice, maxPrice, categoryName);
+    return productRepository.searchProducts(key, minPrice, maxPrice, categoryName)
+            .stream()
+            .map(product -> new ProductSearchDTO(
+                    product.getProductId(),
+                    product.getName(),
+                    product.getDescription(),
+                    product.getPrice(),
+                    product.getThumbUrl()
+            ))
+            .toList();
     }
 
     public ProductDetailDTO getProductDetail(Integer productId) {
