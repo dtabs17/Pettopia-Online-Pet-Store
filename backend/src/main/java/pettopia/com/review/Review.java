@@ -1,4 +1,6 @@
-package pettopia.com.entities;
+package pettopia.com.review;
+
+import pettopia.com.customer.Customer;
 
 import pettopia.com.customer.Customer;
 

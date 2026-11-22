@@ -10,7 +10,6 @@ import pettopia.com.customer.dto.ResetPasswordDTO;
 
 import org.springframework.web.bind.annotation.*;
 import pettopia.com.config.JwtUtil;
-import pettopia.com.dtos.*;
 import pettopia.com.reward.dto.RedeemRequestDTO;
 import pettopia.com.reward.dto.RewardSummaryDTO;
 
