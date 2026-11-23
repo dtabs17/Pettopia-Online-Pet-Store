@@ -20,6 +20,9 @@ function ForgotPassword() {
     return (
         <div className="container mt-4">
             <h2>Forgot Password</h2>
+            <p className="text-muted">
+                Demo mode: No email will be sent. Your password reset link will appear below.
+            </p>
 
             <form onSubmit={handleSubmit}>
                 <input
@@ -28,7 +31,7 @@ function ForgotPassword() {
                     placeholder="Enter your email"
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <button className="btn btn-primary">Send Reset Link</button>
+                <button className="btn btn-primary">Generate Reset Link</button>
             </form>
 
             {resetLink && (
