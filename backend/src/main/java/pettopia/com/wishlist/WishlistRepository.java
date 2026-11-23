@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import pettopia.com.product.Product;
-import pettopia.com.wishlist.Wishlist;
 
 import java.util.List;
 import java.util.Optional;

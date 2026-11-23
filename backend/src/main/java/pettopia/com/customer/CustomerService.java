@@ -53,8 +53,6 @@ public class CustomerService {
 
         passwordResetTokenRepository.save(token);
 
-        System.out.println("Password reset token for " + email + ": " + tokenValue);
-
         return tokenValue;
     }
 

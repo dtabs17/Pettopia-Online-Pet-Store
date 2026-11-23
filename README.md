@@ -317,14 +317,16 @@ All other routes require authentication under the current Spring Security config
 
 ## Password Reset Notes
 
-The forgot-password flow is development-oriented in the current project:
+Pettopia includes a demo password-reset flow without email integration.
 
-- the backend generates a reset token
-- the token is stored in the database
-- the response includes the reset token and a reset URL for testing
-- the frontend displays the reset link directly
+For local testing, set `DEMO_PASSWORD_RESET_ENABLED=true` in the root `.env` file and restart the backend.
 
-This avoids needing a real email delivery service during local development.
+When enabled:
+- The backend generates a single-use reset token with an expiry.
+- The token is stored in the database.
+- The frontend displays the reset link directly instead of sending an email.
+
+The feature is disabled by default. It should only be enabled locally with test accounts, as the flow does not verify email ownership and is not suitable for production use.
 
 ## Password Policy
 
