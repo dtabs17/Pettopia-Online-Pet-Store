@@ -1,4 +1,4 @@
-package pettopia.com.services;
+package pettopia.com.product;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
