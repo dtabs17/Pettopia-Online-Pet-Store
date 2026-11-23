@@ -8,7 +8,6 @@ import pettopia.com.discount.dto.DiscountCodeDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
-import pettopia.com.review.dto.ReviewDTO;
 import pettopia.com.category.Category;
 import pettopia.com.product.dto.ProductDetailDTO;
 import pettopia.com.product.dto.ProductSearchDTO;

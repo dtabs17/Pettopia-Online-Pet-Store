@@ -2,10 +2,8 @@ package pettopia.com.customer;
 
 import pettopia.com.review.Review;
 
-import pettopia.com.review.Review;
 import pettopia.com.order.Order;
 
-import pettopia.com.order.Order;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
