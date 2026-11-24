@@ -377,6 +377,16 @@ Uploaded files are:
 - returned as `/images/...` URLs
 - displayed in both customer and admin views
 
+## Related Engineering Project
+
+### Pettopia Docker Optimisation
+
+[Pettopia Docker Optimisation](https://github.com/dtabs17/pettopia-docker-optimisation) is a separate engineering project investigating Docker image size and build performance using an earlier version of Pettopia's Spring Boot backend.
+
+The November 2026 experiment reduced Docker image disk usage by 39.3% (917 MB to 557 MB) and recorded a 31.5% lower average no-cache build time across five runs per configuration.
+
+Pettopia has since changed significantly, so these measurements do not necessarily reflect the current codebase.
+
 ## Author
 
 David Adebanwo
