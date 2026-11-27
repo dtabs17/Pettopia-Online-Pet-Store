@@ -10,6 +10,7 @@ import pettopia.com.customer.dto.ForgotPasswordRequestDTO;
 import pettopia.com.customer.dto.ForgotPasswordResponseDTO;
 import pettopia.com.customer.dto.ResetPasswordDTO;
 import pettopia.com.security.JwtUtil;
+import pettopia.com.reward.RewardService;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -18,11 +19,12 @@ class CustomerControllerTest {
 
     private final CustomerService customerService = mock(CustomerService.class);
     private final JwtUtil jwtUtil = mock(JwtUtil.class);
+    private final RewardService rewardService = mock(RewardService.class);
 
     @Test
     void forgotPasswordIsBlockedWhenDemoModeIsDisabled() {
         CustomerController controller =
-                new CustomerController(customerService, jwtUtil, false);
+                new CustomerController(customerService, rewardService, jwtUtil, false);
 
         ForgotPasswordRequestDTO request = new ForgotPasswordRequestDTO();
         request.setEmail("test@example.com");
@@ -39,7 +41,7 @@ class CustomerControllerTest {
     @Test
     void resetPasswordIsBlockedWhenDemoModeIsDisabled() {
         CustomerController controller =
-                new CustomerController(customerService, jwtUtil, false);
+                new CustomerController(customerService, rewardService, jwtUtil, false);
 
         ResetPasswordDTO request = new ResetPasswordDTO();
         request.setToken("test-token");
@@ -57,7 +59,7 @@ class CustomerControllerTest {
     @Test
     void forgotPasswordReturnsDemoLinkWhenEnabled() {
         CustomerController controller =
-                new CustomerController(customerService, jwtUtil, true);
+                new CustomerController(customerService, rewardService, jwtUtil, true);
 
         ForgotPasswordRequestDTO request = new ForgotPasswordRequestDTO();
         request.setEmail("test@example.com");
@@ -80,7 +82,7 @@ class CustomerControllerTest {
     @Test
     void resetPasswordWorksWhenDemoModeIsEnabled() {
         CustomerController controller =
-                new CustomerController(customerService, jwtUtil, true);
+                new CustomerController(customerService, rewardService, jwtUtil, true);
 
         ResetPasswordDTO request = new ResetPasswordDTO();
         request.setToken("test-token");
