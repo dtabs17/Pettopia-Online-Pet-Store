@@ -7,32 +7,25 @@ import pettopia.com.security.JwtService;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pettopia.com.reward.RewardTransaction;
-import pettopia.com.reward.RewardTransactionRepository;
-import pettopia.com.reward.dto.RewardSummaryDTO;
+
 
 import java.time.LocalDateTime;
+
 import java.util.UUID;
-
-
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
-    private final RewardTransactionRepository rewardTransactionRepository;
     private final PasswordResetTokenRepository passwordResetTokenRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JwtService jwtService;
 
     public CustomerService(CustomerRepository customerRepository,
-                           RewardTransactionRepository rewardTransactionRepository,
                            PasswordResetTokenRepository passwordResetTokenRepository,
                            JwtService jwtService) {
         this.customerRepository = customerRepository;
-        this.rewardTransactionRepository = rewardTransactionRepository;
         this.passwordResetTokenRepository = passwordResetTokenRepository;
         this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
         this.jwtService = jwtService;
@@ -132,70 +125,6 @@ public class CustomerService {
 
         customerRepository.save(customer);
         throw new RuntimeException("Invalid email or password");
-    }
-
-
-    public void earnPoints(Integer customerId, int points, String source) {
-        Customer customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
-
-        int currentPoints = rewardTransactionRepository.findByCustomerOrderByCreatedAtDesc(customer)
-                .stream()
-                .mapToInt(RewardTransaction::getPoints)
-                .sum();
-
-        int newTotal = currentPoints + points;
-        customer.setRewardPoints(newTotal);
-        customerRepository.save(customer);
-
-        RewardTransaction transaction = RewardTransaction.builder()
-                .customer(customer)
-                .points(points)
-                .transactionType(RewardTransaction.TransactionType.EARN)
-                .source(source)
-                .build();
-
-        rewardTransactionRepository.save(transaction);
-    }
-
-
-    public RewardSummaryDTO getRewardHistory(String customerEmail) {
-        Customer customer = customerRepository.findByEmail(customerEmail)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
-
-        List<RewardTransaction> transactions = rewardTransactionRepository.findByCustomerOrderByCreatedAtDesc(customer);
-
-        int totalPoints = transactions.stream()
-                .mapToInt(RewardTransaction::getPoints)
-                .sum();
-
-        return new RewardSummaryDTO(totalPoints, transactions);
-    }
-
-    public RewardSummaryDTO redeemPoints(String customerEmail, int points, String reason) {
-        Customer customer = customerRepository.findByEmail(customerEmail)
-                .orElseThrow(() -> new RuntimeException("Customer not found"));
-
-        int currentPoints = rewardTransactionRepository.findByCustomerOrderByCreatedAtDesc(customer)
-                .stream()
-                .mapToInt(RewardTransaction::getPoints)
-                .sum();
-
-        if (points > currentPoints) {
-            throw new RuntimeException("Not enough points to redeem");
-        }
-
-        RewardTransaction tx = new RewardTransaction();
-        tx.setCustomer(customer);
-        tx.setPoints(-points);
-        tx.setTransactionType(RewardTransaction.TransactionType.REDEEM);
-        tx.setSource("Manual redemption");
-        tx.setReason(reason);
-        tx.setCreatedAt(LocalDateTime.now());
-
-        rewardTransactionRepository.save(tx);
-
-        return getRewardHistory(customerEmail);
     }
 
     public void changePassword(String customerEmail, String currentPassword, String newPassword) {

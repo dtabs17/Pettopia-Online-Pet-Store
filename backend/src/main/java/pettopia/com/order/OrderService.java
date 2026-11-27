@@ -2,8 +2,7 @@ package pettopia.com.order;
 
 import pettopia.com.customer.Customer;
 import pettopia.com.customer.CustomerRepository;
-import pettopia.com.customer.CustomerService;
-
+import pettopia.com.reward.RewardService;
 
 import pettopia.com.cart.Cart;
 import pettopia.com.cart.CartItem;
@@ -32,7 +31,7 @@ public class OrderService {
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
     private final OrderStatusRepository orderStatusRepository;
-    private final CustomerService customerService;
+    private final RewardService rewardService;
 
     private final pettopia.com.security.JwtUtil jwtUtil;
 
@@ -103,7 +102,7 @@ public class OrderService {
                 .map(i -> i.getPrice().multiply(BigDecimal.valueOf(i.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        int availablePoints = customerService
+        int availablePoints = rewardService
                 .getRewardHistory(email)
                 .getTotalPoints();
 
@@ -120,7 +119,7 @@ public class OrderService {
                 finalTotal = BigDecimal.ZERO;
             }
 
-            customerService.redeemPoints(
+            rewardService.redeemPoints(
                     email,
                     usablePoints,
                     "Used at checkout for order " + order.getOrderId()
@@ -135,7 +134,7 @@ public class OrderService {
                 .intValue();
 
         if (pointsEarned > 0) {
-            customerService.earnPoints(
+            rewardService.earnPoints(
                     customer.getCustomerId(),
                     pointsEarned,
                     "Order purchase"

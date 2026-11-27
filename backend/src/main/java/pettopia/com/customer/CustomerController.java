@@ -13,6 +13,8 @@ import pettopia.com.security.JwtUtil;
 import pettopia.com.reward.dto.RedeemRequestDTO;
 import pettopia.com.reward.dto.RewardSummaryDTO;
 
+import pettopia.com.reward.RewardService;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,13 +25,16 @@ public class CustomerController {
     private final CustomerService customerService;
     private final JwtUtil jwtUtil;
     private final boolean demoPasswordResetEnabled;
+    private final RewardService rewardService;
 
     public CustomerController(
             CustomerService customerService,
+            RewardService rewardService,
             JwtUtil jwtUtil,
             @Value("${pettopia.demo-password-reset.enabled:false}") boolean demoPasswordResetEnabled) {
 
         this.customerService = customerService;
+        this.rewardService = rewardService;
         this.jwtUtil = jwtUtil;
         this.demoPasswordResetEnabled = demoPasswordResetEnabled;
     }
@@ -52,7 +57,7 @@ public class CustomerController {
     @GetMapping("/rewards")
     public RewardSummaryDTO getRewards(@RequestHeader("Authorization") String authHeader) {
         String email = jwtUtil.extractEmail(authHeader);
-        return customerService.getRewardHistory(email);
+        return rewardService.getRewardHistory(email);
     }
 
     @PostMapping("/rewards/redeem")
@@ -60,7 +65,7 @@ public class CustomerController {
             @RequestBody RedeemRequestDTO redeemRequest) {
         String email = jwtUtil.extractEmail(authHeader);
         int points = redeemRequest.getPoints();
-        return customerService.redeemPoints(email, points, "Redeemed via dashboard");
+        return rewardService.redeemPoints(email, points, "Redeemed via dashboard");
     }
 
     @PostMapping("/change-password")
